@@ -128,15 +128,19 @@ class DataTransformation:
             drop_columns=[target_column_name,'ID','Delivery_person_ID','Restaurant_latitude','Restaurant_longitude','Delivery_location_latitude','Delivery_location_longitude','Order_Date','Time_Orderd','Time_Order_picked','Type_of_order']
 
 
-            input_feature_train_df = train_df.drop(columns=drop_columns,axis=1)
-            target_feature_train_df=train_df[target_column_name]
+            train_df.drop(columns=drop_columns, axis=1)
+            input_feature_train_df = train_df
+            target_feature_train_df = train_df[target_column_name]
 
-            input_feature_test_df=test_df.drop(columns=drop_columns,axis=1)
-            target_feature_test_df=test_df[target_column_name]
-            
-            ## Trnasformating using preprocessor obj
-            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
-            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
+            # test_df.drop(columns=drop_columns,axis=1)
+            input_feature_test_df = test_df
+            target_feature_test_df = test_df[target_column_name]
+
+            # Trnasformating using preprocessor obj
+            input_feature_train_arr = preprocessing_obj.fit_transform(
+                input_feature_train_df)
+            input_feature_test_arr = preprocessing_obj.transform(
+                input_feature_test_df)
 
             logging.info("Applying preprocessing object on training and testing datasets.")
             
